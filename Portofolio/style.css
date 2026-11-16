@@ -1,0 +1,437 @@
+/* PERTEMUAN 4: FINAL: menambah CTA, Footer, dan Responsive Design */
+
+/* ==================== GENERAL STYLES ==================== */
+/* Aturan "*" berlaku untuk SEMUA elemen di halaman */
+* {
+  margin: 0;              /* margin = jarak LUAR elemen. 0 = tanpa jarak (menghapus jarak bawaan browser) */
+  padding: 0;             /* padding = jarak DALAM elemen (antara isi dan tepi). 0 = tanpa jarak */
+  box-sizing: border-box; /* box-sizing = cara menghitung lebar elemen. border-box = padding & border ikut dihitung, jadi lebar tidak membengkak */
+}
+
+/* Pengaturan untuk seluruh halaman (tag <html>) */
+html {
+  scroll-behavior: smooth; /* scroll-behavior = cara halaman bergulir. smooth = bergulir halus saat menu diklik */
+}
+
+/* Pengaturan dasar isi website (tag <body>) */
+body {
+  font-family: Arial, sans-serif; /* font-family = jenis huruf. Jika Arial tidak ada, pakai huruf sans-serif lain */
+  background: white;              /* background = warna/gambar latar belakang */
+  color: #111;                    /* color = warna TEKS. #111 = hampir hitam */
+}
+
+/* Semua link (tag <a>) */
+a {
+  color: black;           /* color = warna teks */
+  text-decoration: none;  /* text-decoration = hiasan teks (garis bawah, dll). none = tanpa hiasan */
+}
+
+/* Judul bagian di tengah: What I Do, PORTFOLIO, SKILLS */
+.section-title {
+  text-align: center;     /* text-align = perataan teks. Pilihan: left (kiri), center (tengah), right (kanan) */
+  font-size: 28px;        /* font-size = ukuran huruf. px = satuan piksel, makin besar angka makin besar huruf */
+}
+
+/* Garis pendek di bawah judul */
+.short-line {
+  display: block;         /* display = cara elemen ditampilkan. block = menempati satu baris penuh dan bisa diatur lebar-tingginya */
+  width: 50px;            /* width = lebar elemen */
+  height: 2px;            /* height = tinggi elemen (di sini sebagai ketebalan garis) */
+  background: black;      /* background = warna latar. Karena elemen ini tipis, tampak seperti garis hitam */
+  margin: 10px 0 20px 0;  /* margin = jarak luar. Urutan: atas | kanan | bawah | kiri */
+}
+
+/* Garis pendek yang diletakkan di tengah (untuk judul yang rata tengah) */
+.center-line {
+  margin: 10px auto 40px auto; /* margin = jarak luar. auto pada kiri-kanan = elemen otomatis di tengah */
+}
+
+/* Tombol abu-abu persegi */
+.btn {
+  display: inline-block;  /* display = cara tampil. inline-block = sebaris dengan elemen lain tapi boleh diberi padding/ukuran */
+  background: #d9d9d9;    /* background = warna latar. #d9d9d9 = abu-abu muda */
+  padding: 12px 36px;     /* padding = jarak dalam. Dua angka: atas-bawah 12px, kiri-kanan 36px */
+  font-size: 15px;        /* font-size = ukuran huruf */
+}
+
+/* Tampilan tombol saat kursor mouse berada di atasnya */
+.btn:hover {              /* :hover = keadaan saat mouse diarahkan ke elemen */
+  background: #bbbbbb;    /* background = warna latar, di sini jadi lebih gelap */
+}
+
+/* Tombol putih (dipakai di dalam banner abu-abu) */
+.btn-white {
+  background: white;      /* background = warna latar. white = putih */
+}
+
+/* Wadah tombol: membuat tombol berjajar ke samping */
+.buttons {
+  display: flex;          /* display: flex = Flexbox, anak-anak elemen (tombol) berjajar ke samping dalam satu baris */
+  gap: 15px;              /* gap = jarak ANTAR anak elemen (di sini antar tombol) */
+  flex-wrap: wrap;        /* flex-wrap = boleh turun baris atau tidak. wrap = turun ke baris baru jika tidak muat */
+}
+
+/* Label profesi: kotak hitam dengan teks putih */
+.label {
+  display: inline-block;  /* display = cara tampil. inline-block = kotak hanya selebar teksnya */
+  background: #333;       /* background = warna latar. #333 = abu gelap */
+  color: white;           /* color = warna teks */
+  font-size: 14px;        /* font-size = ukuran huruf */
+  font-weight: bold;      /* font-weight = ketebalan huruf. bold = tebal, normal = biasa */
+  padding: 2px 8px;       /* padding = jarak dalam: atas-bawah 2px, kiri-kanan 8px */
+}
+
+/* Kotak abu-abu pengganti gambar (muncul jika gambar belum ada) */
+.placeholder {
+  background: #d9d9d9;    /* background = warna latar kotak */
+  overflow: hidden;       /* overflow = isi yang melebihi kotak. hidden = bagian yang keluar disembunyikan/dipotong */
+}
+
+/* Gambar di dalam kotak placeholder dan bingkai foto */
+.placeholder img,
+.photo-frame img {
+  width: 100%;            /* width = lebar. 100% = selebar kotak pembungkusnya */
+  height: 100%;           /* height = tinggi. 100% = setinggi kotak pembungkusnya */
+  object-fit: cover;      /* object-fit = cara gambar menyesuaikan kotak. cover = gambar memenuhi kotak, kelebihan dipotong (tidak gepeng) */
+  display: block;         /* display = cara tampil. block = gambar berdiri sendiri, menghilangkan celah kecil di bawahnya */
+}
+
+/* Foto dengan bingkai garis tipis di sekelilingnya */
+.photo-frame {
+  border: 1px solid black; /* border = garis tepi. Urutan: ketebalan | jenis garis (solid = lurus) | warna */
+  padding: 12px;           /* padding = jarak dalam, di sini jarak antara bingkai dan foto */
+  background: white;       /* background = warna latar */
+}
+
+/* ==================== NAVBAR STYLES ==================== */
+/* Bar abu-abu di bagian paling atas */
+.navbar {
+  background: #d9d9d9;    /* background = warna latar navbar */
+  padding: 10px 10%;      /* padding = jarak dalam: atas-bawah 10px, kiri-kanan 10% dari lebar layar */
+}
+
+/* Isi navbar: logo di kiri, menu di kanan */
+.navbar-inner {
+  display: flex;                    /* display: flex = anak elemen (logo dan menu) berjajar ke samping */
+  justify-content: space-between;   /* justify-content = mengatur posisi anak elemen SECARA MENDATAR. space-between = yang pertama di kiri, yang terakhir di kanan, sisanya dibagi rata */
+  align-items: center;              /* align-items = mengatur posisi anak elemen SECARA VERTIKAL. center = sejajar di tengah */
+  flex-wrap: wrap;                  /* flex-wrap: wrap = boleh turun baris jika tidak muat (berguna di HP) */
+  gap: 10px;                        /* gap = jarak antar anak elemen */
+}
+
+/* Tulisan nama di navbar */
+.logo {
+  font-size: 24px;        /* font-size = ukuran huruf */
+  font-weight: bold;      /* font-weight = ketebalan huruf. bold = tebal */
+}
+
+/* Kumpulan menu: HOME, ABOUT ME, WORK, CONTACT */
+.nav-links {
+  display: flex;          /* display: flex = menu berjajar ke samping */
+  gap: 30px;              /* gap = jarak antar menu */
+  font-size: 12px;        /* font-size = ukuran huruf */
+}
+
+/* ==================== HOME SECTION STYLES ==================== */
+/* Bagian pembuka: 2 kolom (teks kiri, foto kanan) */
+.hero {
+  display: grid;                    /* display: grid = tata letak berbentuk kolom dan baris seperti tabel */
+  grid-template-columns: 1fr 1fr;   /* grid-template-columns = menentukan jumlah & lebar kolom. 1fr 1fr = 2 kolom sama lebar (fr = pecahan/bagian) */
+  gap: 40px;                        /* gap = jarak antar kolom */
+  align-items: center;              /* align-items = posisi isi secara vertikal. center = di tengah */
+  padding: 50px 10%;                /* padding = jarak dalam: atas-bawah 50px, kiri-kanan 10% lebar layar */
+}
+
+/* Judul "Hi There!" dan "I'm Lakhdeep Kaur" */
+.hero h1,
+.hero h2 {
+  font-size: 26px;        /* font-size = ukuran huruf */
+}
+
+/* Deskripsi singkat di bawah label profesi */
+.hero-desc {
+  font-size: 12px;        /* font-size = ukuran huruf */
+  margin: 20px 0;         /* margin = jarak luar: atas-bawah 20px, kiri-kanan 0 */
+  max-width: 260px;       /* max-width = lebar maksimal. Teks tidak akan lebih lebar dari 260px */
+}
+
+/* Ukuran foto profil di kanan */
+.hero-photo {
+  width: 320px;           /* width = lebar foto */
+  height: 340px;          /* height = tinggi foto */
+  margin-left: auto;      /* margin-left = jarak luar sisi kiri. auto = otomatis, sehingga foto terdorong ke kanan */
+}
+
+/* ==================== WHAT I DO SECTION STYLES ==================== */
+/* Bagian tiga layanan */
+.services {
+  padding: 50px 10%;      /* padding = jarak dalam: atas-bawah 50px, kiri-kanan 10% */
+}
+
+/* Susunan 3 kolom layanan */
+.services-grid {
+  display: grid;                        /* display: grid = tata letak kolom dan baris */
+  grid-template-columns: 1fr 1fr 1fr;   /* grid-template-columns = jumlah & lebar kolom. 1fr 1fr 1fr = 3 kolom sama lebar */
+  gap: 30px;                            /* gap = jarak antar kolom */
+  text-align: center;                   /* text-align = perataan teks. center = rata tengah */
+}
+
+/* Kotak gambar layanan */
+.service-img {
+  height: 200px;          /* height = tinggi kotak (ubah angkanya jika ingin lebih tinggi) */
+  margin-bottom: 20px;    /* margin-bottom = jarak luar sisi bawah, memberi ruang ke judul */
+}
+
+/* Judul layanan: WEB DEVELOPMENT, dll. */
+.service h3 {
+  font-size: 16px;        /* font-size = ukuran huruf */
+  margin-bottom: 10px;    /* margin-bottom = jarak luar sisi bawah */
+}
+
+/* Deskripsi layanan */
+.service p {
+  font-size: 11px;        /* font-size = ukuran huruf */
+  color: #555;            /* color = warna teks. #555 = abu-abu gelap */
+}
+
+/* ==================== ABOUT ME SECTION STYLES ==================== */
+/* Bagian About Me: 2 kolom (foto kiri, teks kanan) */
+.about-section {
+  display: grid;                    /* display: grid = tata letak kolom dan baris */
+  grid-template-columns: 1fr 1fr;   /* grid-template-columns = 2 kolom sama lebar */
+  gap: 40px;                        /* gap = jarak antar kolom */
+  align-items: center;              /* align-items = posisi isi secara vertikal. center = di tengah */
+  padding: 40px 10%;                /* padding = jarak dalam: atas-bawah 40px, kiri-kanan 10% */
+}
+
+/* Ukuran foto About Me */
+.about-photo {
+  width: 320px;           /* width = lebar foto */
+  height: 340px;          /* height = tinggi foto */
+}
+
+/* Judul ABOUT ME */
+.about-title {
+  font-size: 26px;        /* font-size = ukuran huruf */
+}
+
+/* Paragraf perkenalan */
+.about-text p {
+  font-size: 12px;        /* font-size = ukuran huruf */
+  margin-bottom: 20px;    /* margin-bottom = jarak luar sisi bawah, memberi ruang ke daftar */
+}
+
+/* Daftar keahlian dengan tanda centang */
+.check-list {
+  list-style-type: "✔  "; /* list-style-type = tanda di depan tiap item daftar. Di sini diganti tanda centang */
+  padding-left: 20px;     /* padding-left = jarak dalam sisi kiri, agar tanda centang terlihat */
+}
+
+/* Setiap baris daftar keahlian */
+.check-list li {
+  font-size: 12px;        /* font-size = ukuran huruf */
+  margin-bottom: 12px;    /* margin-bottom = jarak luar sisi bawah, memisahkan antar baris */
+}
+
+/* ==================== PORTFOLIO SECTION STYLES ==================== */
+/* Bagian portofolio */
+.portfolio {
+  padding: 50px 10%;      /* padding = jarak dalam: atas-bawah 50px, kiri-kanan 10% */
+}
+
+/* Grid proyek: 2 kolom. Dengan 4 proyek otomatis menjadi 2 baris */
+.portfolio-grid {
+  display: grid;                    /* display: grid = tata letak kolom dan baris */
+  grid-template-columns: 1fr 1fr;   /* grid-template-columns = 2 kolom sama lebar */
+  gap: 30px;                        /* gap = jarak antar kolom dan antar baris */
+  text-align: center;               /* text-align = perataan teks. center = rata tengah */
+}
+
+/* Kotak gambar proyek: tinggi sama agar seragam */
+.project-img {
+  height: 220px;          /* height = tinggi kotak gambar */
+  margin-bottom: 12px;    /* margin-bottom = jarak luar sisi bawah, ke judul proyek */
+}
+
+/* Judul proyek di bawah gambar */
+.project h3 {
+  font-size: 18px;        /* font-size = ukuran huruf */
+}
+
+/* Wadah tombol VIEW MY PROJECTS */
+.center-button {
+  text-align: center;     /* text-align: center = isi (tombol) berada di tengah */
+  margin-top: 40px;       /* margin-top = jarak luar sisi atas, dari grid proyek */
+}
+
+/* ==================== SKILLS SECTION STYLES ==================== */
+/* Bagian skills. Kiri-kanan 0 agar panah bisa menempel di tepi layar */
+.skills {
+  padding: 30px 0 60px 0; /* padding = jarak dalam. Urutan: atas | kanan | bawah | kiri */
+}
+
+/* Susunan panah kiri | kartu | panah kanan berjajar ke samping */
+.skills-wrapper {
+  display: flex;          /* display: flex = panah dan kartu berjajar ke samping */
+  align-items: center;    /* align-items = posisi vertikal. center = panah sejajar di tengah kartu */
+  gap: 10px;              /* gap = jarak antar panah dan kartu */
+}
+
+/* Kumpulan 4 kartu skills */
+.skills-grid {
+  flex: 1;                /* flex: 1 = elemen ini mengambil semua sisa ruang yang tersedia */
+  display: grid;          /* display: grid = tata letak kolom dan baris */
+  grid-template-columns: 1fr 1fr 1fr 1fr;  /* grid-template-columns = 4 kolom sama lebar */
+  gap: 12px;              /* gap = jarak antar kartu */
+}
+
+/* Satu kartu skill */
+.skill-card {
+  background: white;      /* background = warna latar kartu */
+  border: 1px solid #ddd; /* border = garis tepi: tebal 1px, lurus (solid), abu-abu muda */
+  padding: 14px 10px;     /* padding = jarak dalam: atas-bawah 14px, kiri-kanan 10px */
+}
+
+/* Ikon sederhana di dalam kartu */
+.skill-icon {
+  display: block;         /* display: block = ikon berdiri di baris sendiri */
+  font-size: 22px;        /* font-size = ukuran simbol */
+  margin-bottom: 8px;     /* margin-bottom = jarak luar sisi bawah */
+}
+
+/* Judul kartu */
+.skill-card h3 {
+  font-size: 11px;        /* font-size = ukuran huruf */
+  margin-bottom: 8px;     /* margin-bottom = jarak luar sisi bawah */
+}
+
+/* Daftar teknologi di kartu */
+.skill-card p {
+  font-size: 9px;         /* font-size = ukuran huruf */
+  color: #555;            /* color = warna teks abu-abu gelap */
+}
+
+/* Tombol panah (hanya hiasan, tidak berfungsi) */
+.arrow {
+  background: #d9d9d9;    /* background = warna latar tombol */
+  width: 36px;            /* width = lebar tombol */
+  height: 42px;           /* height = tinggi tombol */
+  line-height: 38px;      /* line-height = tinggi satu baris teks. Dibuat hampir sama dengan tinggi kotak agar panah di tengah */
+  text-align: center;     /* text-align = perataan teks. center = rata tengah */
+  font-size: 30px;        /* font-size = ukuran simbol panah */
+  color: #555;            /* color = warna simbol */
+}
+
+/* ==================== CTA SECTION STYLES ==================== */
+/* Banner abu-abu "Have a project in mind?" */
+.cta {
+  background: #d9d9d9;    /* background = warna latar banner */
+  text-align: center;     /* text-align = perataan teks. center = rata tengah */
+  padding: 40px 10%;      /* padding = jarak dalam: atas-bawah 40px, kiri-kanan 10% */
+}
+
+/* Tulisan besar di banner */
+.cta h2 {
+  font-size: 24px;        /* font-size = ukuran huruf */
+  margin-bottom: 24px;    /* margin-bottom = jarak luar sisi bawah, ke tombol */
+}
+
+/* ".cta .buttons" = elemen .buttons yang ada DI DALAM .cta */
+.cta .buttons {
+  justify-content: center; /* justify-content = posisi anak elemen secara mendatar. center = berada di tengah */
+}
+
+/* ==================== FOOTER STYLES ==================== */
+/* Footer 2 kolom: nama di kiri, kontak di kanan */
+.footer {
+  display: grid;                    /* display: grid = tata letak kolom dan baris */
+  grid-template-columns: 1fr 1fr;   /* grid-template-columns = 2 kolom sama lebar */
+  gap: 30px;                        /* gap = jarak antar kolom */
+  padding: 40px 10%;                /* padding = jarak dalam: atas-bawah 40px, kiri-kanan 10% */
+}
+
+/* Nama di footer */
+.footer-name {
+  font-size: 22px;        /* font-size = ukuran huruf */
+  font-weight: normal;    /* font-weight = ketebalan huruf. normal = huruf biasa (tidak tebal) */
+  margin-bottom: 12px;    /* margin-bottom = jarak luar sisi bawah */
+}
+
+/* Tulisan hak cipta */
+.copyright {
+  font-size: 9px;         /* font-size = ukuran huruf */
+  margin-top: 20px;       /* margin-top = jarak luar sisi atas */
+}
+
+/* Setiap baris kontak: ikon di kiri, teks di kanan */
+.footer-right p {
+  display: flex;          /* display: flex = ikon dan teks berjajar ke samping */
+  align-items: center;    /* align-items = posisi vertikal. center = ikon dan teks sejajar di tengah */
+  gap: 14px;              /* gap = jarak antara ikon dan teks */
+  font-size: 13px;        /* font-size = ukuran huruf */
+  font-weight: bold;      /* font-weight = ketebalan huruf. bold = tebal */
+  margin-bottom: 14px;    /* margin-bottom = jarak luar sisi bawah, antar baris kontak */
+}
+
+/* Ikon kontak (simbol teks) */
+.icon {
+  width: 30px;            /* width = lebar area ikon */
+  font-size: 24px;        /* font-size = ukuran simbol */
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+/* @media = aturan khusus untuk ukuran layar tertentu.
+   max-width: 768px artinya aturan di dalamnya hanya berlaku jika lebar layar 768px atau kurang (tablet & HP). */
+@media (max-width: 768px) {
+
+  /* Jarak kiri-kanan semua bagian dibuat lebih kecil agar hemat tempat */
+  .navbar,
+  .hero,
+  .services,
+  .about-section,
+  .portfolio,
+  .cta,
+  .footer {
+    padding-left: 5%;     /* padding-left = jarak dalam sisi kiri */
+    padding-right: 5%;    /* padding-right = jarak dalam sisi kanan */
+  }
+
+  /* Logo dan menu navbar pindah ke tengah */
+  .navbar-inner {
+    justify-content: center; /* justify-content = posisi anak elemen secara mendatar. center = di tengah */
+  }
+
+  /* Dua kolom / tiga kolom diubah menjadi SATU kolom */
+  .hero,
+  .about-section,
+  .services-grid,
+  .portfolio-grid,
+  .footer {
+    grid-template-columns: 1fr; /* grid-template-columns = 1fr berarti hanya 1 kolom, isi tersusun ke bawah */
+  }
+
+  /* Foto pindah ke tengah */
+  .hero-photo,
+  .about-photo {
+    margin: 0 auto;       /* margin = jarak luar. 0 untuk atas-bawah, auto untuk kiri-kanan = di tengah */
+  }
+
+  /* Kartu skills jadi 2 kolom */
+  .skills-grid {
+    grid-template-columns: 1fr 1fr; /* grid-template-columns = 2 kolom sama lebar */
+  }
+
+  /* Panah hiasan disembunyikan di layar kecil */
+  .arrow {
+    display: none;        /* display: none = elemen disembunyikan sepenuhnya */
+  }
+}
+
+/* Layar HP kecil (480px atau kurang) */
+@media (max-width: 480px) {
+
+  /* Kartu skills jadi 1 kolom */
+  .skills-grid {
+    grid-template-columns: 1fr; /* grid-template-columns = 1 kolom saja */
+  }
+}
